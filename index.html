@@ -1,0 +1,864 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priya Tanaji Kadam | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .body-font {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        
+        .hover\:scale-105:hover {
+            transform: scale(1.05);
+        }
+        
+        .hover\:shadow-lg:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hover\:underline:hover {
+            text-decoration: underline;
+        }
+        
+        .section-header {
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            border-radius: 2px;
+        }
+        
+        .certificate-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Progress Bars */
+        .progress-bar {
+            background-color: #e5e7eb;
+            height: 8px;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            transition: width 1s ease-in-out;
+        }
+
+        /* Navigation Links */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Back to Top Button */
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2563eb;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            display: none;
+            z-index: 40;
+            transition: opacity 0.3s;
+        }
+
+        #backToTop:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Fade-In Animation */
+        .animate-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hamburger Menu for Mobile */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 2px 0;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #1e3a8a;
+                padding: 20px;
+            }
+
+            .mobile-menu.active {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="body-font bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="bg-indigo-900 text-white fixed w-full z-40 shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold">Priya Kadam</a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links flex space-x-6">
+                <a href="#objective" class="nav-link">Objective</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#internships" class="nav-link">Internships</a>
+                <a href="#certifications" class="nav-link">Certifications</a>
+                <a href="#achievements" class="nav-link">Achievements</a>
+                <a href="#activities" class="nav-link">Activities</a>
+                <a href="#languages" class="nav-link">Languages</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="mobile-menu">
+                <a href="#objective" class="nav-link py-2">Objective</a>
+                <a href="#education" class="nav-link py-2">Education</a>
+                <a href="#projects" class="nav-link py-2">Projects</a>
+                <a href="#internships" class="nav-link py-2">Internships</a>
+                <a href="#certifications" class="nav-link py-2">Certifications</a>
+                <a href="#achievements" class="nav-link py-2">Achievements</a>
+                <a href="#activities" class="nav-link py-2">Activities</a>
+                <a href="#languages" class="nav-link py-2">Languages</a>
+                <a href="#contact" class="nav-link py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-indigo-900 to-purple-800 text-white py-24 pt-32">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center justify-center">
+                <div class="bg-gray-200 border-4 border-dashed rounded-xl w-32 h-32 flex items-center justify-center mb-6 hover:scale-105 transition-all">
+                    <i class="fas fa-user-graduate text-4xl text-indigo-800"></i>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold mb-2">Priya Tanaji Kadam</h1>
+                <p class="text-xl font-light max-w-2xl text-center mb-8">B.Tech in Artificial Intelligence & Data Science</p>
+                
+                <div class="flex flex-wrap justify-center gap-6 mb-8">
+                    <a href="mailto:priyakadam7134@gmail.com" class="text-white hover:text-indigo-200 transition-all">
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope fa-lg mr-3"></i>
+                            <span>priyakadam7134@gmail.com</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/Priya-Kadamstudenthhyu" target="_blank" class="text-white hover:text-indigo-200 transition-all">
+                        <div class="flex items-center">
+                            <i class="fab fa-github fa-lg mr-3"></i>
+                            <span>GitHub</span>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/priya-kadam-147521268/" target="_blank" class="text-white hover:text-indigo-200 transition-all">
+                        <div class="flex items-center">
+                            <i class="fab fa-linkedin-in fa-lg mr-3"></i>
+                            <span>LinkedIn</span>
+                        </div>
+                    </a>
+                    <a href="#" class="text-white hover:text-indigo-200 transition-all">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt fa-lg mr-3"></i>
+                            <span>Barshi, Maharashtra</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <a href="path-to-resume.pdf" download class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition-all hover:shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <i class="fas fa-download mr-2"></i>Download Resume
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Career Objective -->
+        <section id="objective" class="bg-white rounded-2xl shadow-md p-6 mb-8 hover:shadow-lg transition-all animate-fade-in">
+            <div class="flex items-center mb-6">
+                <div class="bg-indigo-100 border-t-4 border-indigo-500 rounded-xl w-12 h-12 flex items-center justify-center mr-4">
+                    <i class="fas fa-briefcase text-xl text-indigo-700"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 section-header">Career Objective</h2>
+            </div>
+            <p class="text-gray-600">Looking for a position where I can make a positive impact, kick start my career in the IT industry, learn new things and utilize my skills for the growth of an organization.</p>
+        </section>
+
+        <!-- Education -->
+        <section id="education" class="bg-white rounded-2xl shadow-md p-6 mb-8 hover:shadow-lg transition-all animate-fade-in">
+            <div class="flex items-center mb-6">
+                <div class="bg-green-100 border-t-4 border-green-500 rounded-xl w-12 h-12 flex items-center justify-center mr-4">
+                    <i class="fas fa-graduation-cap text-xl text-green-700"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 section-header">Education</h2>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="border-l-4 border-indigo-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">B.Tech - Artificial Intelligence & Data Science</h3>
+                    <p class="text-gray-600"><span class="font-medium">Institution:</span> N.K. Orchid College Of Engineering and Technology, Solapur</p>
+                    <p class="text-gray-600"><span class="font-medium">Duration:</span> 2022-2026</p>
+                    <p class="text-gray-600"><span class="font-medium">CGPA:</span> <span class="text-indigo-700 font-bold">8.27</span></p>
+                </div>
+                
+                <div class="border-l-4 border-green-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Higher Secondary Education (HSC-12th)</h3>
+                    <p class="text-gray-600"><span class="font-medium">Institution:</span> Maharashtra Vidyalay, Barshi</p>
+                    <p class="text-gray-600"><span class="font-medium">Duration:</span> 2021-2022</p>
+                    <p class="text-gray-600"><span class="font-medium">Percentage:</span> <span class="text-green-700 font-bold">72%</span></p>
+                </div>
+                
+                <div class="border-l-4 border-yellow-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Secondary School Certificate (SSC-10th)</h3>
+                    <p class="text-gray-600"><span class="font-medium">Institution:</span> Madhyamik Ashram School, Khamgaon</p>
+                    <p class="text-gray-600"><span class="font-medium">Duration:</span> 2019-2020</p>
+                    <p class="text-gray-600"><span class="font-medium">Percentage:</span> <span class="text-yellow-600 font-bold">88.20%</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class="bg-white rounded-2xl shadow-md p-6 mb-8 hover:shadow-lg transition-all animate-fade-in">
+            <div class="flex items-center mb-6">
+                <div class="bg-purple-100 border-t-4 border-purple-500 rounded-xl w-12 h-12 flex items-center justify-center mr-4">
+                    <i class="fas fa-tasks text-xl text-purple-700"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 section-header">Projects</h2>
+            </div>
+            
+            <div class="space-y-6">
+                <!-- Flight Price Prediction -->
+                <div class="border-l-4 border-indigo-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Flight Price Prediction</h3>
+                    <p class="text-gray-600">Implemented using Graph Neural Networks (GNN) and Artificial Neural Networks (ANN) on Google Colab. Predicted flight prices with improved accuracy by leveraging graph-based relationships and deep learning techniques.</p>
+                    <div class="flex flex-wrap gap-3 mt-3">
+                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Python</span>
+                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">GNN</span>
+                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">ANN</span>
+                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Google Colab</span>
+                    </div>
+                    <div class="mt-3">
+                        <a href="https://github.com/Priya-Kadamstudenthhyu/student" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-medium transition-all hover:underline flex items-center">
+                            <i class="fab fa-github mr-2"></i>View on GitHub
+                        </a>
+                        <button onclick="openModal('flightPriceModal')" class="text-indigo-600 hover:text-indigo-800 font-medium transition-all hover:underline flex items-center mt-2">
+                            <i class="fas fa-info-circle mr-2"></i>View Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Power BI Dashboard -->
+                <div class="border-l-4 border-blue-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Power BI Dashboard</h3>
+                    <p class="text-gray-600">Created an interactive dashboard using Power BI, following a comprehensive YouTube tutorial. Visualized key business metrics and insights from a sample dataset, with dynamic filters and charts.</p>
+                    <div class="flex flex-wrap gap-3 mt-3">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Power BI</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Data Visualization</span>
+                    </div>
+                    <div class="mt-3">
+                        <button onclick="openModal('powerBIModal')" class="text-blue-600 hover:text-blue-800 font-medium transition-all hover:underline flex items-center">
+                            <i class="fas fa-info-circle mr-2"></i>View Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- MS Excel Data Modeling -->
+                <div class="border-l-4 border-green-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">MS Excel Data Modeling</h3>
+                    <p class="text-gray-600">Designed and implemented data models and dashboards in Microsoft Excel. Utilized advanced Excel formulas, pivot tables, and charts to create meaningful visualizations for decision making.</p>
+                    <div class="flex flex-wrap gap-3 mt-3">
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">MS Excel</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Data Modeling</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Pivot Tables</span>
+                    </div>
+                    <div class="mt-3">
+                        <button onclick="openModal('excelModal')" class="text-green-600 hover:text-green-800 font-medium transition-all hover:underline flex items-center">
+                            <i class="fas fa-info-circle mr-2"></i>View Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Real-Time Emotion Detection -->
+                <div class="border-l-4 border-red-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Real-Time Emotion Detection Using AI Models</h3>
+                    <p class="text-gray-600">A web-based application that uses webcam video input to detect real-time user emotions using DeepFace, and plays personalized music from YouTube based on detected emotion. Includes interactive analytics dashboard and downloadable reports.</p>
+                    <div class="flex flex-wrap gap-3 mt-3">
+                        <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Python</span>
+                        <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">DeepFace</span>
+                        <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">AI/ML</span>
+                        <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Web Development</span>
+                    </div>
+                    <div class="mt-3">
+                        <a href="https://github.com/Priya-Kadamstudenthhyu" target="_blank" class="text-red-600 hover:text-red-800 font-medium transition-all hover:underline flex items-center">
+                            <i class="fab fa-github mr-2"></i>View on GitHub
+                        </a>
+                        <button onclick="openModal('emotionModal')" class="text-red-600 hover:text-red-800 font-medium transition-all hover:underline flex items-center mt-2">
+                            <i class="fas fa-info-circle mr-2"></i>View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training & Internships -->
+        <section id="internships" class="bg-white rounded-2xl shadow-md p-6 mb-8 hover:shadow-lg transition-all animate-fade-in">
+            <div class="flex items-center mb-6">
+                <div class="bg-yellow-100 border-t-4 border-yellow-500 rounded-xl w-12 h-12 flex items-center justify-center mr-4">
+                    <i class="fas fa-briefcase text-xl text-yellow-700"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 section-header">Training & Internships</h2>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="border-l-4 border-indigo-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Deloitte Technology Consulting Virtual Internship</h3>
+                    <p class="text-gray-600"><span class="font-medium">Organization:</span> Forage</p>
+                    <p class="text-gray-600"><span class="font-medium">Duration:</span> 2025</p>
+                    <p class="text-gray-600">Business technology problem solving, data analysis, and client solution design.</p>
+                    <div class="mt-3">
+                        <button onclick="openModal('deloitteCert')" class="text-indigo-600 hover:text-indigo-800 font-medium transition-all hover:underline flex items-center">
+                            <i class="fas fa-certificate mr-2"></i>View Certificate
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="border-l-4 border-green-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Data Science Internship</h3>
+                    <p class="text-gray-600"><span class="font-medium">Organization:</span> GrowthLink</p>
+                    <p class="text-gray-600"><span class="font-medium">Duration:</span> Mar–Apr 2025</p>
+                    <p class="text-gray-600">Data analysis, visualization, and ML model development.</p>
+                </div>
+                
+                <div class="border-l-4 border-purple-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Data Analytics Job Simulation</h3>
+                    <p class="text-gray-600"><span class="font-medium">Organization:</span> Quantium & Forage</p>
+                    <p class="text-gray-600"><span class="font-medium">Duration:</span> April 2025</p>
+                    <p class="text-gray-600">Completed tasks in data preparation, customer analytics, experimentation, uplift testing, and commercial analytics.</p>
+                    <div class="mt-3">
+                        <button onclick="openModal('quantiumCert')" class="text-purple-600 hover:text-purple-800 font-medium transition-all hover:underline flex items-center">
+                            <i class="fas fa-certificate mr-2"></i>View Certificate
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="border-l-4 border-pink-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Corporate Skills Training</h3>
+                    <p class="text-gray-600"><span class="font-medium">Organization:</span> Eminence</p>
+                    <p class="text-gray-600"><span class="font-medium">Duration:</span> Aug 2023</p>
+                    <p class="text-gray-600">Teamwork, communication, workplace readiness.</p>
+                </div>
+                
+                <div class="border-l-4 border-teal-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">2-Week Workshop</h3>
+                    <p class="text-gray-600"><span class="font-medium">Organization:</span> Quantitative Aptitude & Logical Reasoning</p>
+                    <p class="text-gray-600"><span class="font-medium">Duration:</span> 2025</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section id="certifications" class="bg-white rounded-2xl shadow-md p-6 mb-8 hover:shadow-lg transition-all animate-fade-in">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 border-t-4 border-blue-500 rounded-xl w-12 h-12 flex items-center justify-center mr-4">
+                    <i class="fas fa-certificate text-xl text-blue-700"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 section-header">Certifications</h2>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="border-l-4 border-green-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Introduction to Google Cloud Platform</h3>
+                    <p class="text-gray-600"><span class="font-medium">Provider:</span> Simplilearn</p>
+                </div>
+                
+                <div class="border-l-4 border-red-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Introduction to Generative AI</h3>
+                    <p class="text-gray-600"><span class="font-medium">Provider:</span> Analytics Vidhya</p>
+                    <div class="mt-3">
+                        <button onclick="openModal('genAICert')" class="text-red-600 hover:text-red-800 font-medium transition-all hover:underline flex items-center">
+                            <i class="fas fa-certificate mr-2"></i>View Certificate
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="border-l-4 border-purple-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Introduction to Machine Learning Concepts</h3>
+                    <p class="text-gray-600"><span class="font-medium">Provider:</span> Microsoft Learn</p>
+                    <p class="text-gray-600"><span class="font-medium">Completed on:</span> August 4, 2025</p>
+                </div>
+                
+                <div class="border-l-4 border-indigo-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Introduction to AI Concepts</h3>
+                    <p class="text-gray-600"><span class="font-medium">Provider:</span> Microsoft Learn</p>
+                    <p class="text-gray-600"><span class="font-medium">Completed on:</span> August 4, 2025</p>
+                </div>
+                
+                <div class="border-l-4 border-yellow-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Google Cloud Fundamentals</h3>
+                    <p class="text-gray-600"><span class="font-medium">Provider:</span> Google</p>
+                    <p class="text-gray-600"><span class="font-medium">Duration:</span> July – December 2024</p>
+                </div>
+                
+                <div class="border-l-4 border-teal-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Google Cloud Platform</h3>
+                    <p class="text-gray-600"><span class="font-medium">Provider:</span> Google Cloud</p>
+                    <div class="mt-3">
+                        <button onclick="openModal('gcpCert')" class="text-teal-600 hover:text-teal-800 font-medium transition-all hover:underline flex items-center">
+                            <i class="fas fa-certificate mr-2"></i>View Certificate
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="border-l-4 border-orange-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">IoT Certification</h3>
+                    <p class="text-gray-600"><span class="font-medium">Provider:</span> Infosys Springboard</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements -->
+        <section id="achievements" class="bg-white rounded-2xl shadow-md p-6 mb-8 hover:shadow-lg transition-all animate-fade-in">
+            <div class="flex items-center mb-6">
+                <div class="bg-yellow-100 border-t-4 border-yellow-500 rounded-xl w-12 h-12 flex items-center justify-center mr-4">
+                    <i class="fas fa-trophy text-xl text-yellow-700"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 section-header">Achievements</h2>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="border-l-4 border-indigo-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Google Cloud Champion Milestone (2025)</h3>
+                    <p class="text-gray-600">Recognized for expertise in cloud computing; awarded Champion Package.</p>
+                </div>
+                
+                <div class="border-l-4 border-purple-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Research Paper Selection (2025)</h3>
+                    <p class="text-gray-600">Co-authored a paper accepted for presentation at the International Conference on Smart Computing, Communication and Automation (ICSCCA 2K25), organized by Budge Budge Institute of Technology, India.</p>
+                </div>
+                
+                <div class="border-l-4 border-pink-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Sparkathon Innovation Challenge (2025)</h3>
+                    <p class="text-gray-600">Participated in a national-level design thinking and innovation event, developing creative solutions through teamwork.</p>
+                </div>
+                
+                <div class="border-l-4 border-green-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Smart India Hackathon</h3>
+                    <p class="text-gray-600">Collaborated in a team to design innovative real-world solutions.</p>
+                </div>
+                
+                <div class="border-l-4 border-red-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Kabaddi – District Level</h3>
+                    <p class="text-gray-600">1st Runner-Up, showcasing strategic gameplay and leadership skills.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Extracurricular Activities -->
+        <section id="activities" class="bg-white rounded-2xl shadow-md p-6 mb-8 hover:shadow-lg transition-all animate-fade-in">
+            <div class="flex items-center mb-6">
+                <div class="bg-pink-100 border-t-4 border-pink-500 rounded-xl w-12 h-12 flex items-center justify-center mr-4">
+                    <i class="fas fa-users text-xl text-pink-700"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 section-header">Extracurricular Activities</h2>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="border-l-4 border-indigo-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Membership Coordinator – AAISA Club</h3>
+                    <p class="text-gray-600">Artificial Intelligence and Students Association</p>
+                </div>
+                
+                <div class="border-l-4 border-purple-500 pl-4 certificate-card">
+                    <h3 class="text-xl font-semibold text-gray-800">Club Member – Orchid Innovation Club</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Languages -->
+        <section id="languages" class="bg-white rounded-2xl shadow-md p-6 mb-8 hover:shadow-lg transition-all animate-fade-in">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 border-t-4 border-blue-500 rounded-xl w-12 h-12 flex items-center justify-center mr-4">
+                    <i class="fas fa-globe text-xl text-blue-700"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 section-header">Languages Known</h2>
+            </div>
+            
+            <div class="flex flex-wrap gap-6">
+                <div class="bg-gray-100 rounded-xl px-6 py-4 min-w-max certificate-card">
+                    <h3 class="font-medium text-gray-800 mb-2">English</h3>
+                    <p class="text-gray-600">Professional Proficiency</p>
+                    <div class="progress-bar mt-2">
+                        <div class="progress-fill bg-blue-600" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <div class="bg-gray-100 rounded-xl px-6 py-4 min-w-max certificate-card">
+                    <h3 class="font-medium text-gray-800 mb-2">Hindi</h3>
+                    <p class="text-gray-600">Professional Proficiency</p>
+                    <div class="progress-bar mt-2">
+                        <div class="progress-fill bg-blue-600" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <div class="bg-gray-100 rounded-xl px-6 py-4 min-w-max certificate-card">
+                    <h3 class="font-medium text-gray-800 mb-2">Marathi</h3>
+                    <p class="text-gray-600">Native Proficiency</p>
+                    <div class="progress-bar mt-2">
+                        <div class="progress-fill bg-blue-600" style="width: 95%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="bg-white rounded-2xl shadow-md p-6 mb-8 hover:shadow-lg transition-all animate-fade-in">
+            <div class="flex items-center mb-6">
+                <div class="bg-indigo-100 border-t-4 border-indigo-500 rounded-xl w-12 h-12 flex items-center justify-center mr-4">
+                    <i class="fas fa-envelope text-xl text-indigo-700"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 section-header">Get in Touch</h2>
+            </div>
+            <form action="https://formspree.io/f/your-form-id" method="POST" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                    <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                </div>
+                <div>
+                    <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                </div>
+                <div>
+                    <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                    <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+                </div>
+                <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition-all hover:shadow-lg transform hover:scale-105">
+                    <i class="fas fa-paper-plane mr-2"></i>Send Message
+                </button>
+            </form>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-indigo-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center">
+                <div class="bg-gray-200 border-4 border-dashed rounded-xl w-16 h-16 flex items-center justify-center mb-4 hover:scale-105 transition-all">
+                    <i class="fas fa-user-graduate text-2xl text-indigo-800"></i>
+                </div>
+                <h2 class="text-xl font-bold mb-2">Priya Tanaji Kadam</h2>
+                <p class="text-center text-gray-300 mb-6">B.Tech in Artificial Intelligence & Data Science</p>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="mailto:priyakadam7134@gmail.com" class="text-white hover:text-indigo-200 transition-all">
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope fa-lg mr-3"></i>
+                            <span>Email</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/Priya-Kadamstudenthhyu" target="_blank" class="text-white hover:text-indigo-200 transition-all">
+                        <div class="flex items-center">
+                            <i class="fab fa-github fa-lg mr-3"></i>
+                            <span>GitHub</span>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/priya-kadam-147521268/" target="_blank" class="text-white hover:text-indigo-200 transition-all">
+                        <div class="flex items-center">
+                            <i class="fab fa-linkedin-in fa-lg mr-3"></i>
+                            <span>LinkedIn</span>
+                        </div>
+                    </a>
+                </div>
+                <p class="mt-6 text-gray-400">&copy; 2025 Priya Tanaji Kadam | Professional Portfolio</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals for Certificates -->
+    <div id="deloitteCert" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('deloitteCert')">&times;</span>
+            <iframe loading="lazy" src="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_fiwB9p9Kiu5K6hh5C_1749087330342_completion_certificate.pdf" width="100%" height="600px"></iframe>
+        </div>
+    </div>
+
+    <div id="quantiumCert" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('quantiumCert')">&times;</span>
+            <iframe loading="lazy" src="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/32A6DqtsbF7LbKdcq/NkaC7knWtjSbi6aYv_32A6DqtsbF7LbKdcq_fiwB9p9Kiu5K6hh5C_1743840612703_completion_certificate.pdf" width="100%" height="600px"></iframe>
+        </div>
+    </div>
+
+    <div id="genAICert" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('genAICert')">&times;</span>
+            <iframe loading="lazy" src="https://github.com/Priya-Kadamstudenthhyu/Introduction_to_Generative_AI.pdf" width="100%" height="600px"></iframe>
+        </div>
+    </div>
+
+    <div id="gcpCert" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('gcpCert')">&times;</span>
+            <iframe loading="lazy" src="https://github.com/Priya-Kadamstudenthhyu/certificates-Google_Cloud_Platform.pdf" width="100%" height="600px"></iframe>
+        </div>
+    </div>
+
+    <!-- Modals for Project Details -->
+    <div id="flightPriceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('flightPriceModal')">&times;</span>
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Flight Price Prediction</h3>
+            <p class="text-gray-600 mb-4">This project utilized Graph Neural Networks (GNN) and Artificial Neural Networks (ANN) to predict flight prices with high accuracy. The model was trained on a dataset containing flight routes, dates, and pricing information, leveraging graph-based relationships to capture complex patterns.</p>
+            <p class="text-gray-600 mb-4"><strong>Technologies Used:</strong> Python, GNN, ANN, Google Colab</p>
+            <p class="text-gray-600 mb-4"><strong>Key Features:</strong></p>
+            <ul class="list-disc pl-5 text-gray-600 mb-4">
+                <li>Data preprocessing and feature engineering</li>
+                <li>Graph-based modeling for flight route analysis</li>
+                <li>Hyperparameter tuning for improved accuracy</li>
+            </ul>
+            <a href="https://github.com/Priya-Kadamstudenthhyu/student" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-medium transition-all hover:underline flex items-center">
+                <i class="fab fa-github mr-2"></i>View on GitHub
+            </a>
+        </div>
+    </div>
+
+    <div id="powerBIModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('powerBIModal')">&times;</span>
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Power BI Dashboard</h3>
+            <p class="text-gray-600 mb-4">Developed an interactive dashboard using Power BI to visualize key business metrics. The dashboard included dynamic filters, slicers, and charts to provide actionable insights from a sample dataset.</p>
+            <p class="text-gray-600 mb-4"><strong>Technologies Used:</strong> Power BI, Data Visualization</p>
+            <p class="text-gray-600 mb-4"><strong>Key Features:</strong></p>
+            <ul class="list-disc pl-5 text-gray-600 mb-4">
+                <li>Interactive charts and graphs</li>
+                <li>Dynamic data filtering</li>
+                <li>User-friendly interface for business analytics</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="excelModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('excelModal')">&times;</span>
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">MS Excel Data Modeling</h3>
+            <p class="text-gray-600 mb-4">Designed data models and dashboards in Microsoft Excel to support decision-making processes. Utilized advanced Excel features like pivot tables, VLOOKUP, and charts to create insightful visualizations.</p>
+            <p class="text-gray-600 mb-4"><strong>Technologies Used:</strong> MS Excel, Data Modeling, Pivot Tables</p>
+            <p class="text-gray-600 mb-4"><strong>Key Features:</strong></p>
+            <ul class="list-disc pl-5 text-gray-600 mb-4">
+                <li>Advanced formula implementation</li>
+                <li>Dynamic pivot table analysis</li>
+                <li>Visual dashboards for data insights</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="emotionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('emotionModal')">&times;</span>
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Real-Time Emotion Detection Using AI Models</h3>
+            <p class="text-gray-600 mb-4">A web-based application that detects real-time user emotions using DeepFace and plays personalized music from YouTube based on the detected emotion. The application includes an analytics dashboard and downloadable reports.</p>
+            <p class="text-gray-600 mb-4"><strong>Technologies Used:</strong> Python, DeepFace, AI/ML, Web Development</p>
+            <p class="text-gray-600 mb-4"><strong>Key Features:</strong></p>
+            <ul class="list-disc pl-5 text-gray-600 mb-4">
+                <li>Real-time emotion detection via webcam</li>
+                <li>Integration with YouTube API for music playback</li>
+                <li>Interactive analytics dashboard</li>
+                <li>Downloadable emotion analysis reports</li>
+            </ul>
+            <a href="https://github.com/Priya-Kadamstudenthhyu" target="_blank" class="text-red-600 hover:text-red-800 font-medium transition-all hover:underline flex items-center">
+                <i class="fab fa-github mr-2"></i>View on GitHub
+            </a>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Modal Functions
+        function openModal(id) {
+            document.getElementById(id).style.display = "block";
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+        }
+
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({behavior: 'smooth'});
+            });
+        });
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        window.onscroll = () => {
+            if (window.scrollY > 300) backToTop.style.display = 'block';
+            else backToTop.style.display = 'none';
+        };
+
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // Animate Fade-In Sections
+        const faders = document.querySelectorAll('.animate-fade-in');
+        const appearOptions = {
+            threshold: 0.2,
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+    </script>
+</body>
+</html>
+```
